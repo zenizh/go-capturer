@@ -8,7 +8,7 @@ import (
 
 var captureStdout, captureStderr bool
 
-// CaptureStdout Capture `os.Stdout`
+// CaptureStdout captures stdout.
 func CaptureStdout(f func()) string {
 	captureStdout = true
 	defer func() {
@@ -17,7 +17,7 @@ func CaptureStdout(f func()) string {
 	return capture(f)
 }
 
-// CaptureStderr Capture `os.Stderr`
+// CaptureStderr captures stderr.
 func CaptureStderr(f func()) string {
 	captureStderr = true
 	defer func() {
@@ -26,7 +26,7 @@ func CaptureStderr(f func()) string {
 	return capture(f)
 }
 
-// CaptureOutput Capture `os.Stdout` and `os.Stderr`
+// CaptureOutput captures stdout and stderr.
 func CaptureOutput(f func()) string {
 	captureStdout = true
 	captureStderr = true
