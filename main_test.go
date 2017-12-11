@@ -3,36 +3,32 @@ package capturer
 import (
 	"fmt"
 	"os"
-	"testing"
 )
 
-func TestCaptureStdout(t *testing.T) {
+func ExampleCaptureStdout() {
 	out := CaptureStdout(func() {
 		fmt.Fprint(os.Stdout, "foo")
 	})
 
-	if out != "foo" {
-		t.Errorf("Unexpected output: %s", out)
-	}
+	fmt.Println(out)
+	// Output: foo
 }
 
-func TestCaptureStderr(t *testing.T) {
+func ExampleCaptureStderr() {
 	out := CaptureStderr(func() {
-		fmt.Fprint(os.Stderr, "foo")
+		fmt.Fprint(os.Stderr, "bar")
 	})
 
-	if out != "foo" {
-		t.Errorf("Unexpected output: %s", out)
-	}
+	fmt.Println(out)
+	// Output: bar
 }
 
-func TestCaptureOutput(t *testing.T) {
+func ExampleCaptureOutput() {
 	out := CaptureOutput(func() {
 		fmt.Fprint(os.Stdout, "foo")
 		fmt.Fprint(os.Stderr, "bar")
 	})
 
-	if out != "foobar" {
-		t.Errorf("Unexpected output: %s", out)
-	}
+	fmt.Println(out)
+	// Output: foobar
 }
