@@ -6,44 +6,37 @@ import (
 	"os"
 )
 
-var captureStdout, captureStderr bool
+// Capturer has flags whether capture stdout/stderr or not.
+type Capturer struct {
+	captureStdout bool
+	captureStderr bool
+}
 
 // CaptureStdout captures stdout.
 func CaptureStdout(f func()) string {
-	captureStdout = true
-	defer func() {
-		captureStdout = false
-	}()
-	return capture(f)
+	capturer := &Capturer{captureStdout: true}
+	return capturer.capture(f)
 }
 
 // CaptureStderr captures stderr.
 func CaptureStderr(f func()) string {
-	captureStderr = true
-	defer func() {
-		captureStderr = false
-	}()
-	return capture(f)
+	capturer := &Capturer{captureStderr: true}
+	return capturer.capture(f)
 }
 
 // CaptureOutput captures stdout and stderr.
 func CaptureOutput(f func()) string {
-	captureStdout = true
-	captureStderr = true
-	defer func() {
-		captureStdout = false
-		captureStderr = false
-	}()
-	return capture(f)
+	capturer := &Capturer{captureStdout: true, captureStderr: true}
+	return capturer.capture(f)
 }
 
-func capture(f func()) string {
+func (capturer *Capturer) capture(f func()) string {
 	r, w, err := os.Pipe()
 	if err != nil {
 		panic(err)
 	}
 
-	if captureStdout {
+	if capturer.captureStdout {
 		stdout := os.Stdout
 		os.Stdout = w
 		defer func() {
@@ -51,7 +44,7 @@ func capture(f func()) string {
 		}()
 	}
 
-	if captureStderr {
+	if capturer.captureStderr {
 		stderr := os.Stderr
 		os.Stderr = w
 		defer func() {
