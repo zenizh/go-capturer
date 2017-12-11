@@ -1,5 +1,9 @@
 # go-capturer
 
+[![GoDoc](https://godoc.org/github.com/kami-zh/go-capturer?status.svg)](https://godoc.org/github.com/kami-zh/go-capturer)
+[![Build Status](https://travis-ci.org/kami-zh/go-capturer.svg?branch=master)](https://travis-ci.org/kami-zh/go-capturer)
+[![Go Report Card](https://goreportcard.com/badge/github.com/kami-zh/go-capturer)](https://goreportcard.com/report/github.com/kami-zh/go-capturer)
+
 Capture `os.Stdout` and/or `os.Stderr` in Go.
 This package is useful for writing tests which print some outputs using `fmt` package.
 
