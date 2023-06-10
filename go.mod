@@ -1,3 +1,3 @@
 module github.com/zenizh/go-capturer
 
-go 1.17
+go 1.20
